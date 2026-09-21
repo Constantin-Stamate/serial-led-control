@@ -1,18 +1,18 @@
 #include <Arduino.h>
 
-// put function declarations here:
-int myFunction(int, int);
+#include "app_serial_terminal/app_serial_terminal.h"
+#include "ed_led/ed_led.h"
+#include "srv_stdio_serial/srv_stdio_serial.h"
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+    initSerial();
+    initLed(13);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
+    String command = readCommand();
 
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+    if (command.length() > 0) {
+        handleCommand(command);
+    }
 }
